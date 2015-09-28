@@ -1,5 +1,6 @@
 package com.android.guessaboo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ public class InvitationActivity extends BaseActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
+            startActivity(new Intent(this, PhotoShareActivity.class));
             return true;
         }
 

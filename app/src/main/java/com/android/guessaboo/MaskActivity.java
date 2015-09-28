@@ -59,10 +59,10 @@ public class MaskActivity extends BaseActivity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-       /* int image = (int) adapterView.getItemAtPosition(i);
+        int image = (int) adapterView.getItemAtPosition(i);
         Intent intent = new Intent();
         intent.putExtra("image", image);
         setResult(PhotoMaskActivity.MASK_CODE, intent);
-        finish();*/
+        finish();
     }
 }

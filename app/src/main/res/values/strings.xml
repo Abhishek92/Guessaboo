@@ -10,4 +10,5 @@
     <string name="title_activity_project">Project</string>
     <string name="title_activity_mask">Mask</string>
     <string name="title_activity_text">Text</string>
+    <string name="title_activity_photo_share">Photo Share</string>
 </resources>
