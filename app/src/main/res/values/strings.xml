@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Guessaboo</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_activity_invitation">Invitation</string>
+    <string name="title_activity_photo_mask">Photo Mask</string>
+    <string name="title_activity_sticker">Sticker</string>
+    <string name="title_activity_project">Project</string>
+    <string name="title_activity_mask">Mask</string>
+    <string name="title_activity_text">Text</string>
+</resources>

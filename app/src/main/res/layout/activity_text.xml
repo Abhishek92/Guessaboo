@@ -1,0 +1,124 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.android.guessaboo.TextActivity">
+
+    <RelativeLayout
+        android:padding="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:gravity="center_vertical|center"
+            android:background="@drawable/white_background"/>
+
+        <Button
+            android:id="@+id/bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:text="Bold"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/italic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:layout_centerHorizontal="true"
+            android:text="Italic"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/underline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text"
+            android:text="Underline"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bold"
+            android:text="Left"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/italic"
+            android:text="Center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/underline"
+            android:text="Right"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="8dp"/>
+
+        <RadioGroup
+            android:id="@+id/points_radio_group"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/left"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical" >
+
+            <RadioButton
+                android:id="@+id/academy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:checked="true"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:text="Academy"
+                android:drawablePadding="120dp"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/agency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:text="Agency FB"
+                android:drawablePadding="80dp"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/alab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:text="Alab"
+                android:drawablePadding="80dp"
+                android:textColor="#000000" />
+
+            <RadioButton
+                android:id="@+id/arial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="@android:drawable/btn_radio"
+                android:drawablePadding="80dp"
+                android:text="Arial"
+                android:textColor="#000000" />
+
+
+        </RadioGroup>
+
+    </RelativeLayout>
+
+
+</ScrollView>
