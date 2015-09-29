@@ -1,78 +1,81 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context="com.android.guessaboo.PhotoMaskActivity">
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:orientation="vertical"
-       android:padding="10dp"
-       android:weightSum="100">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp">
 
-       <LinearLayout
-           android:id="@+id/workspace"
-           android:layout_width="match_parent"
-           android:layout_height="0dp"
-           android:layout_weight="60"
-           android:background="#000000"
-           android:orientation="vertical"/>
+        <LinearLayout
+            android:id="@+id/workspace"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000000"
+            android:orientation="vertical" />
 
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:layout_marginTop="10dp"
-           android:weightSum="100">
-<Button
-    android:id="@+id/musicBtn"
-    android:layout_width="0dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="25"
-    android:textColor="@android:color/white"
-    android:background="@drawable/button_bg"
-    android:layout_marginRight="8dp"
-    android:text="Music"/>
-           <Button
-               android:id="@+id/maskBtn"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="25"
-               android:textColor="@android:color/white"
-               android:background="@drawable/button_bg"
-               android:layout_marginRight="8dp"
-               android:text="Mask"/>
-           <Button
-               android:id="@+id/stickerBtn"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="25"
-               android:layout_marginRight="8dp"
-               android:textColor="@android:color/white"
-               android:background="@drawable/button_bg"
-               android:text="Sticker"/>
-           <Button
-               android:id="@+id/textBtn"
-               android:layout_width="0dp"
-               android:layout_height="wrap_content"
-               android:layout_weight="25"
-               android:textColor="@android:color/white"
-               android:background="@drawable/button_bg"
-               android:text="Text"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            android:weightSum="100">
 
-       </LinearLayout>
+            <Button
+                android:id="@+id/musicBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="25"
+                android:background="@drawable/button_bg"
+                android:text="Music"
+                android:textColor="@android:color/white" />
 
-       <Button
-           android:id="@+id/uploadBtn"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:textColor="@android:color/white"
-           android:background="@drawable/button_bg"
-           android:layout_marginTop="8dp"
-           android:text="Upload"/>
+            <Button
+                android:id="@+id/maskBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="25"
+                android:background="@drawable/button_bg"
+                android:text="Mask"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/stickerBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:layout_weight="25"
+                android:background="@drawable/button_bg"
+                android:text="Sticker"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/textBtn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="25"
+                android:background="@drawable/button_bg"
+                android:text="Text"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/uploadBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_bg"
+            android:text="Upload"
+            android:textColor="@android:color/white" />
 
 
-   </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>

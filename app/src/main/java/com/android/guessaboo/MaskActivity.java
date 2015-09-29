@@ -3,18 +3,20 @@ package com.android.guessaboo;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 
 import com.android.guessaboo.adapter.ImageAdapter;
 
 public class MaskActivity extends BaseActivity implements AdapterView.OnItemClickListener {
 
-    GridView mGridView;
+    private GridView mGridView;
     // references to our images
     private Integer[] mThumbIds = {
             R.drawable.mask1, R.drawable.mask2,
@@ -22,12 +24,16 @@ public class MaskActivity extends BaseActivity implements AdapterView.OnItemClic
 
 
     };
+
+    private int IMAGE_ID;
+    private EditText mMaskEt;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.activity_mask, mContainer);
         mGridView = (GridView) findViewById(R.id.maskView);
+        mMaskEt = (EditText) findViewById(R.id.maskName);
         ImageAdapter adapter = new ImageAdapter(this, mThumbIds);
         mGridView.setAdapter(adapter);
         mGridView.setChoiceMode(GridView.CHOICE_MODE_SINGLE);
@@ -51,6 +57,13 @@ public class MaskActivity extends BaseActivity implements AdapterView.OnItemClic
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
+            if(!TextUtils.isEmpty(mMaskEt.getText().toString())) {
+                Intent intent = new Intent();
+                intent.putExtra("image", IMAGE_ID);
+                setResult(PhotoMaskActivity.MASK_CODE, intent);
+                finish();
+            }else
+                mMaskEt.setError("Mask name is required");
             return true;
         }
 
@@ -59,10 +72,6 @@ public class MaskActivity extends BaseActivity implements AdapterView.OnItemClic
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        int image = (int) adapterView.getItemAtPosition(i);
-        Intent intent = new Intent();
-        intent.putExtra("image", image);
-        setResult(PhotoMaskActivity.MASK_CODE, intent);
-        finish();
+        IMAGE_ID = (int) adapterView.getItemAtPosition(i);
     }
 }

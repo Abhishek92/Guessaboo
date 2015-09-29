@@ -22,6 +22,7 @@ public class StickerActivity extends BaseActivity implements AdapterView.OnItemC
             R.drawable.sk_013
 
     };
+    private int IMAGE_ID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +52,10 @@ public class StickerActivity extends BaseActivity implements AdapterView.OnItemC
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
+            Intent intent = new Intent();
+            intent.putExtra("image", IMAGE_ID);
+            setResult(PhotoMaskActivity.STICKER_CODE, intent);
+            finish();
             return true;
         }
 
@@ -59,10 +64,6 @@ public class StickerActivity extends BaseActivity implements AdapterView.OnItemC
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        int image = (int) adapterView.getItemAtPosition(i);
-        Intent intent = new Intent();
-        intent.putExtra("image", image);
-        setResult(PhotoMaskActivity.STICKER_CODE, intent);
-        finish();
+        IMAGE_ID = (int) adapterView.getItemAtPosition(i);
     }
 }

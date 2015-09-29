@@ -3,9 +3,12 @@ package com.android.guessaboo;
 import android.app.Activity;
 import android.content.ClipData;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -17,6 +20,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+
+import java.io.File;
 
 public class PhotoMaskActivity extends BaseActivity implements View.OnClickListener,View.OnTouchListener, View.OnDragListener {
 
@@ -31,8 +37,13 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.activity_photo_mask, mContainer);
 
+        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
+        int deviceHeight = displayMetrics.heightPixels;
+
         mWorkSpace = (LinearLayout) findViewById(R.id.workspace);
-        //mImg = (ImageView) findViewById(R.id.img);
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mWorkSpace.getLayoutParams();
+        params.height = (int) (deviceHeight * .40f);
+        mWorkSpace.setLayoutParams(params);
 
         findViewById(R.id.musicBtn).setOnClickListener(this);
         findViewById(R.id.maskBtn).setOnClickListener(this);
@@ -41,15 +52,7 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.uploadBtn).setOnClickListener(this);
 
         mWorkSpace.setOnDragListener(this);
-        /*mImg.setOnTouchListener(this);
 
-        mImg.setVisibility(View.VISIBLE);*/
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-       // mImg.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -117,6 +120,8 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
                 int id = data.getIntExtra("image",0);
                 addImageToWorkspace(id);
             }
+        }else if(requestCode == TEXT_CODE){
+            addImageFromFileToWorkspace();
         }
     }
 
@@ -152,10 +157,25 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
 
     private void addImageToWorkspace(int id){
         ImageView iv = new ImageView(this);
-        iv.setLayoutParams(new ViewGroup.LayoutParams(80,80));
+        iv.setLayoutParams(new ViewGroup.LayoutParams(90,90));
         iv.setImageResource(id);
         iv.setOnTouchListener(this);
         mWorkSpace.addView(iv);
+    }
+
+    private void addImageFromFileToWorkspace(){
+        File imgFile = new  File(Util.FILE_PATH);
+
+        if(imgFile.exists()){
+
+            Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+            ImageView iv = new ImageView(this);
+            iv.setLayoutParams(new ViewGroup.LayoutParams(mWorkSpace.getWidth() - 90, mWorkSpace.getHeight() - 90));
+            iv.setImageBitmap(myBitmap);
+            iv.setOnTouchListener(this);
+            mWorkSpace.addView(iv);
+
+        }
     }
 
     @Override

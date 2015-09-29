@@ -52,7 +52,11 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
+            mText.setBackgroundResource(android.R.color.transparent);
             Bitmap bitmap = mText.getDrawingCache();
+            Util.saveBitmap(bitmap);
+            setResult(PhotoMaskActivity.TEXT_CODE);
+            finish();
             return true;
         }
 
