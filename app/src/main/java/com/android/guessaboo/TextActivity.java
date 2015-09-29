@@ -1,10 +1,12 @@
 package com.android.guessaboo;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.style.ClickableSpan;
 import android.text.style.UnderlineSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -75,13 +77,31 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
                 mText.setText(content);
                 break;
             case R.id.bold:
+                removeUnderline(mText.getText().toString());
                 mText.setTypeface(null, Typeface.BOLD);
                 break;
             case R.id.italic:
+                removeUnderline(mText.getText().toString());
                 mText.setTypeface(null, Typeface.ITALIC);
                 break;
             default:
                 break;
         }
+    }
+
+    private void removeUnderline(String text){
+        SpannableString ss= new SpannableString(text);
+        ss.setSpan(new ClickableSpan() {
+            @Override
+            public void onClick(View view) {
+
+            }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(false);
+            }
+        },  0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
 }

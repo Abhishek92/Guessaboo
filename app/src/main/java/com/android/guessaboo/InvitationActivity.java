@@ -6,14 +6,19 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
-public class InvitationActivity extends BaseActivity {
+public class InvitationActivity extends BaseActivity implements View.OnClickListener {
 
+    TextView timerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.activity_invitation, mContainer);
+        timerView = (TextView) findViewById(R.id.timer);
+        findViewById(R.id.setTimer).setOnClickListener(this);
     }
 
     @Override
@@ -38,5 +43,12 @@ public class InvitationActivity extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view.getId() == R.id.setTimer){
+            Util.showTimePicker(this, timerView);
+        }
     }
 }
