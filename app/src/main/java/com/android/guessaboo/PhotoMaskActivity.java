@@ -2,10 +2,12 @@ package com.android.guessaboo;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -21,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.io.File;
 
@@ -50,6 +53,7 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         findViewById(R.id.stickerBtn).setOnClickListener(this);
         findViewById(R.id.textBtn).setOnClickListener(this);
         findViewById(R.id.uploadBtn).setOnClickListener(this);
+        findViewById(R.id.musicBtn).setOnClickListener(this);
 
         mWorkSpace.setOnDragListener(this);
 
@@ -72,7 +76,10 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
-            startActivity(new Intent(this, InvitationActivity.class));
+            if(!isImageSelected)
+                Toast.makeText(this, "Workspace is empty!", Toast.LENGTH_LONG).show();
+            else
+                showSaveLayoutDialog();
             return true;
         }
 
@@ -93,6 +100,9 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
                 break;
             case R.id.uploadBtn:
                 showPicker();
+                break;
+            case R.id.musicBtn:
+                startActivity(new Intent(this, SongsActivity.class));
                 break;
             default:
                 break;
@@ -189,5 +199,31 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         } else {
             return false;
         }
+    }
+
+    private void showSaveLayoutDialog(){
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        // Setting Dialog Title
+        alertDialog.setTitle("Save layout");
+
+        // Setting Dialog Message
+        alertDialog.setMessage("Are you satisfied with object placement?");
+
+        // Setting Positive "Yes" Button
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog,int which) {
+                startActivity(new Intent(PhotoMaskActivity.this, InvitationActivity.class));
+            }
+        });
+
+        // Setting Negative "NO" Button
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        // Showing Alert Message
+        alertDialog.show();
     }
 }

@@ -26,7 +26,9 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_marginLeft="8dp"
-                android:text="Set timer"/>
+                android:text="Set timer"
+                android:background="@drawable/button_bg"
+                android:textColor="@android:color/white"/>
 
         </LinearLayout>
 
@@ -42,6 +44,7 @@
             android:inputType="textMultiLine"
             android:maxLines="4"
             android:layout_marginTop="8dp"
+            android:padding="5dp"
             android:background="@drawable/white_background"
             android:id="@+id/decoyName" />
         <TextView
@@ -55,6 +58,7 @@
             android:inputType="textMultiLine"
             android:maxLines="4"
             android:layout_marginTop="8dp"
+            android:padding="5dp"
             android:background="@drawable/white_background"
             android:id="@+id/challengerMessage" />
 
@@ -69,6 +73,7 @@
             android:inputType="textMultiLine"
             android:maxLines="4"
             android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:background="@drawable/white_background"
             android:id="@+id/congratulationMessage" />
 
@@ -83,6 +88,7 @@
             android:inputType="textMultiLine"
             android:maxLines="4"
             android:layout_marginTop="10dp"
+            android:padding="5dp"
             android:background="@drawable/white_background"
             android:id="@+id/defeatMessage" />
 

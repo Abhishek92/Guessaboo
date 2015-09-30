@@ -44,6 +44,7 @@ public class BaseActivity extends AppCompatActivity {
     private Uri mCapturedImageURI;
     private String IMAGE_PATH;
     private MenuItem menuItem;
+    protected boolean isImageSelected = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,6 +177,7 @@ public class BaseActivity extends AppCompatActivity {
                     c.moveToFirst();
                     String path = c.getString(c.getColumnIndex(MediaStore.Images.Media.DATA));
                     IMAGE_PATH = FileUtils.getPath(this, mCapturedImageURI);
+                    isImageSelected = true;
                     onImageSet();
 
                     c.close();
@@ -184,6 +186,7 @@ public class BaseActivity extends AppCompatActivity {
                 } else if (requestCode == GALLERY_KITKAT_INTENT_CALLED) {
 
                     IMAGE_PATH = FileUtils.getPath(this, mCapturedImageURI);
+                    isImageSelected = true;
                     mCapturedImageURI = Uri.fromFile(new File(IMAGE_PATH));
                     onImageSet();
 
@@ -198,6 +201,7 @@ public class BaseActivity extends AppCompatActivity {
                         .getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                 cursor.moveToFirst();
                 IMAGE_PATH = cursor.getString(column_index_data);
+                isImageSelected = true;
                 onImageSet();
                 cursor.close();
 
@@ -222,6 +226,4 @@ public class BaseActivity extends AppCompatActivity {
     protected void onImageSet(){
 
     }
-
-
 }
