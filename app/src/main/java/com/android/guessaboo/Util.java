@@ -20,8 +20,11 @@ import android.text.format.DateFormat;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Calendar;
 
 /**
@@ -30,6 +33,7 @@ import java.util.Calendar;
 public class Util {
 
     public static String FILE_PATH =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"temp.png";
+    public static String FILE_SEPERATOR =  "$$$$$";
     public static void showTimePicker(Context context, final TextView time) {
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = 0;
@@ -206,5 +210,31 @@ public class Util {
      */
     public static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+    public static void saveData(Context context, String data){
+        String filename = "data.txt";
+        FileOutputStream outputStream;
+
+        try {
+            outputStream = context.openFileOutput(filename, Context.MODE_APPEND);
+            outputStream.write(data.getBytes());
+            outputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getData(Context context) throws IOException {
+        FileInputStream fis = context.openFileInput("data.txt");
+        InputStreamReader isr = new InputStreamReader(fis);
+        BufferedReader bufferedReader = new BufferedReader(isr);
+        StringBuilder sb = new StringBuilder();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            sb.append(line);
+        }
+
+        return sb.toString();
     }
 }

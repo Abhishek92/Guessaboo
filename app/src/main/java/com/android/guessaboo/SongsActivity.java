@@ -1,22 +1,67 @@
 package com.android.guessaboo;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
+
+import com.android.guessaboo.adapter.MusicAdapter;
+import com.android.guessaboo.adapter.MusicItem;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SongsActivity extends BaseActivity implements View.OnClickListener {
 
     private final int MUSIC_REQ_CODE = 101;
+    private ListView mSongsList;
+    private MusicAdapter mAdapter;
+    private List<MusicItem> data = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.activity_songs, mContainer);
         findViewById(R.id.uploadMusic).setOnClickListener(this);
+        mSongsList = (ListView) findViewById(R.id.songsList);
+        mSongsList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+
+        try {
+            String[] str = Util.getData(this).split(Util.FILE_SEPERATOR);
+            for(int i = 0; i < str.length; i++){
+
+                MusicItem item = new MusicItem();
+                item.setFilePath(str[i]);
+                item.setDuration(getDuration(str[i]));
+                data.add(item);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        setAdapter();
+    }
+
+    private void setAdapter(){
+        mAdapter = new MusicAdapter(this, data);
+        mSongsList.setAdapter(mAdapter);
+    }
+
+    private String getDuration(String source) throws IOException {
+        MediaPlayer mp = new MediaPlayer();
+        mp.setDataSource(source);
+        int duration = mp.getDuration();
+
+        int seconds = (int) (duration / 1000) % 60 ;
+        int minutes = (int) ((duration / (1000*60)) % 60);
+
+        return minutes+" : "+seconds;
     }
 
     @Override
@@ -59,7 +104,9 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
                 //the selected audio.
                 Uri uri = data.getData();
                 String path = Util.getPath(this, uri);
+                path = path + Util.FILE_SEPERATOR;
                 System.out.println(path);
+                Util.saveData(this, path);
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
