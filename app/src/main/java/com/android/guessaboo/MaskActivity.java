@@ -21,8 +21,6 @@ public class MaskActivity extends BaseActivity implements AdapterView.OnItemClic
     private Integer[] mThumbIds = {
             R.drawable.mask1, R.drawable.mask2,
             R.drawable.mask3, R.drawable.mask4
-
-
     };
 
     private int IMAGE_ID;

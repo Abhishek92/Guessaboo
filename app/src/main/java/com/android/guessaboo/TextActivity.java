@@ -14,16 +14,36 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-public class TextActivity extends BaseActivity implements View.OnClickListener {
+public class TextActivity extends BaseActivity implements View.OnClickListener,RadioGroup.OnCheckedChangeListener {
 
     private EditText mText;
+    private Typeface academyTf;
+    private Typeface agencyTf;
+    private Typeface albaTf ;
+    private Typeface arialTf;
+    private RadioGroup fontGroup;
+    private RadioButton academy;
+    private RadioButton agency;
+    private RadioButton alba;
+    private RadioButton arial;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         LayoutInflater inflater = (LayoutInflater) this.getSystemService(LAYOUT_INFLATER_SERVICE);
         inflater.inflate(R.layout.activity_text, mContainer);
         mText = (EditText) findViewById(R.id.text);
+        fontGroup = (RadioGroup) findViewById(R.id.points_radio_group);
+        academy = (RadioButton) findViewById(R.id.academy);
+        agency = (RadioButton) findViewById(R.id.agency);
+        alba = (RadioButton) findViewById(R.id.alab);
+        arial = (RadioButton) findViewById(R.id.arial);
+
+        initFont();
+        setTextFont();
+
         mText.setDrawingCacheEnabled(true);
 
         findViewById(R.id.center).setOnClickListener(this);
@@ -32,6 +52,7 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.bold).setOnClickListener(this);
         findViewById(R.id.italic).setOnClickListener(this);
         findViewById(R.id.underline).setOnClickListener(this);
+        fontGroup.setOnCheckedChangeListener(this);
 
     }
 
@@ -107,5 +128,40 @@ public class TextActivity extends BaseActivity implements View.OnClickListener {
                 ds.setUnderlineText(false);
             }
         },  0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    }
+
+    private void setTextFont(){
+        academy.setTypeface(academyTf);
+        agency.setTypeface(agencyTf);
+        arial.setTypeface(arialTf);
+        alba.setTypeface(albaTf);
+    }
+
+    private void initFont(){
+        academyTf = Typeface.createFromAsset(getApplicationContext().getAssets(), "academy.ttf");
+        agencyTf = Typeface.createFromAsset(getApplicationContext().getAssets(), "agency_fb.ttf");
+        albaTf = Typeface.createFromAsset(getApplicationContext().getAssets(), "alba.ttf");
+        arialTf = Typeface.createFromAsset(getApplicationContext().getAssets(), "arial.ttf");
+
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+        switch (i){
+            case R.id.arial:
+                mText.setTypeface(arialTf);
+                break;
+            case R.id.academy:
+                mText.setTypeface(academyTf);
+                break;
+            case R.id.agency:
+                mText.setTypeface(agencyTf);
+                break;
+            case R.id.alab:
+                mText.setTypeface(albaTf);
+                break;
+            default:
+                break;
+        }
     }
 }
