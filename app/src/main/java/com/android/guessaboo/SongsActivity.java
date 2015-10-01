@@ -32,8 +32,13 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
         mSongsList = (ListView) findViewById(R.id.songsList);
         mSongsList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
+        getData();
+
+    }
+
+    private void getData(){
         try {
-            String[] str = Util.getData(this).split(Util.FILE_SEPERATOR);
+            String[] str = Util.getData(this).split("\\" +Util.FILE_SEPERATOR);
             for(int i = 0; i < str.length; i++){
 
                 MusicItem item = new MusicItem();
@@ -44,7 +49,6 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         setAdapter();
     }
 
@@ -107,6 +111,7 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
                 path = path + Util.FILE_SEPERATOR;
                 System.out.println(path);
                 Util.saveData(this, path);
+                getData();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

@@ -91,10 +91,10 @@ public class TextActivity extends BaseActivity implements View.OnClickListener,R
                 mText.setGravity(Gravity.CENTER);
                 break;
             case R.id.right:
-                mText.setGravity(Gravity.RIGHT|Gravity.CENTER);
+                mText.setGravity(Gravity.RIGHT | Gravity.CENTER);
                 break;
             case R.id.left:
-                mText.setGravity(Gravity.LEFT|Gravity.CENTER);
+                mText.setGravity(Gravity.LEFT | Gravity.CENTER);
                 break;
             case R.id.underline:
                 SpannableString content = new SpannableString(mText.getText().toString());

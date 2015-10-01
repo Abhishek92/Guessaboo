@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -33,7 +35,7 @@ import java.util.Calendar;
 public class Util {
 
     public static String FILE_PATH =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"temp.png";
-    public static String FILE_SEPERATOR =  "$$$$$";
+    public static String FILE_SEPERATOR =  "|";
     public static void showTimePicker(Context context, final TextView time) {
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = 0;
@@ -236,5 +238,30 @@ public class Util {
         }
 
         return sb.toString();
+    }
+
+    public static String getSongDuration(String path){
+        MediaMetadataRetriever metaRetriever = new MediaMetadataRetriever();
+        metaRetriever.setDataSource(path);
+
+        String out = "";
+        // get mp3 info
+
+        // convert duration to minute:seconds
+        String duration =
+                metaRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+        Log.v("time", duration);
+        long dur = Long.parseLong(duration);
+        String seconds = String.valueOf((dur % 60000) / 1000);
+
+        Log.v("seconds", seconds);
+        String minutes = String.valueOf(dur / 60000);
+        out = minutes + ":" + seconds;
+
+        Log.v("minutes", minutes);
+        // close object
+        metaRetriever.release();
+
+        return out;
     }
 }

@@ -10,7 +10,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Upload my mask"/>
+        android:text="Upload my mask"
+        android:background="@drawable/button_bg"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@android:color/white"/>
 
     <TextView
         android:layout_width="wrap_content"

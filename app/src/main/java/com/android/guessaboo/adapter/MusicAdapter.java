@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.android.guessaboo.R;
+import com.android.guessaboo.Util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +45,9 @@ public class MusicAdapter extends BaseAdapter {
                 R.layout.music_item_layout, parent, false);
         TextView name = (TextView) convertView.findViewById(R.id.songName);
         TextView duration = (TextView) convertView.findViewById(R.id.songDuration);
-
-        name.setText(item.getFilePath());
-        duration.setText(item.getDuration());
+        String fileName = item.getFilePath().substring(item.getFilePath().lastIndexOf("/") + 1);
+        name.setText(fileName);
+        duration.setText(Util.getSongDuration(item.getFilePath()));
         return convertView;
     }
 }
