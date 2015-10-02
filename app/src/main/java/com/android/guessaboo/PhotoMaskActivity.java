@@ -129,21 +129,21 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == MASK_CODE || requestCode == Activity.RESULT_OK){
+        if(requestCode == MASK_CODE && resultCode == MASK_CODE){
             if(data != null){
                 int id = data.getIntExtra("image",0);
                 addImageToWorkspace(id);
                 mDesc.setVisibility(View.GONE);
             }
-        }else if(requestCode == STICKER_CODE){
+        }else if(requestCode == STICKER_CODE && resultCode == STICKER_CODE){
             if(data != null){
                 int id = data.getIntExtra("image",0);
                 addImageToWorkspace(id);
                 mDesc.setVisibility(View.GONE);
             }
-        }else if(requestCode == TEXT_CODE){
+        }else if(requestCode == TEXT_CODE && resultCode == TEXT_CODE){
             addImageFromFileToWorkspace();
-        }else if(requestCode == MUSIC_CODE){
+        }else if(requestCode == MUSIC_CODE && resultCode == MUSIC_CODE){
             if(data != null){
                 MUSIC_FILE_PATH = data.getStringExtra("music");
             }
