@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:padding="10dp"
     android:weightSum="100"
@@ -12,16 +12,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="70"
-        android:text="Abc.mp3"/>
+        android:text="Abc.mp3"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/songDuration"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="30"
         android:layout_gravity="end"
         android:text="5:03"
         android:gravity="center"
+        android:textSize="16sp"
         android:layout_alignParentRight="true"
-       />
+        android:textStyle="bold" />
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.text.style.ClickableSpan;
 import android.text.style.UnderlineSpan;
 import android.view.Gravity;
@@ -73,12 +74,15 @@ public class TextActivity extends BaseActivity implements View.OnClickListener,R
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
-            mText.setBackgroundResource(android.R.color.transparent);
-            Bitmap bitmap = mText.getDrawingCache();
-            Util.saveBitmap(bitmap);
-            setResult(PhotoMaskActivity.TEXT_CODE);
-            finish();
-            return true;
+            if(!TextUtils.isEmpty(mText.getText().toString())) {
+                mText.setBackgroundResource(android.R.color.transparent);
+                Bitmap bitmap = mText.getDrawingCache();
+                Util.saveBitmap(bitmap);
+                setResult(PhotoMaskActivity.TEXT_CODE);
+                finish();
+                return true;
+            }else
+                mText.setError("Text is required");
         }
 
         return super.onOptionsItemSelected(item);
