@@ -38,6 +38,10 @@ public class MusicAdapter extends BaseAdapter {
         return 0;
     }
 
+    public void clearData(){
+        data.clear();
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup parent) {
         MusicItem item = (MusicItem) getItem(i);

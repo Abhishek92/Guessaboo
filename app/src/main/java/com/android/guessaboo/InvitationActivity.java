@@ -19,6 +19,7 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
     private TextView mChallengerMsg;
     private TextView mCongratsMsg;
     private TextView mDefetMsg;
+    private String mMusicPath;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,9 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
         mCongratsMsg = (TextView) findViewById(R.id.congratulationMessage);
         mDefetMsg = (TextView) findViewById(R.id.defeatMessage);
         findViewById(R.id.setTimer).setOnClickListener(this);
+
+        mMusicPath = getIntent().getStringExtra("music");
+        timerView.setText(Util.getSongDuration(mMusicPath));
     }
 
     @Override
@@ -49,8 +53,15 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
-            if(validate())
-                startActivity(new Intent(this, PhotoShareActivity.class));
+            if(validate()) {
+                Intent intent = new Intent(this, PhotoShareActivity.class);
+                intent.putExtra("decoyName", mDecoyName.getText().toString());
+                intent.putExtra("challengerMsg", mChallengerMsg.getText().toString());
+                intent.putExtra("congratsMsg", mCongratsMsg.getText().toString());
+                intent.putExtra("defeatMsg", mDefetMsg.getText().toString());
+                intent.putExtra("music", mMusicPath);
+                startActivity(intent);
+            }
             return true;
         }
 

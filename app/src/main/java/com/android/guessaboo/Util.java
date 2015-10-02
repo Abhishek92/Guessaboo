@@ -19,6 +19,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -34,7 +35,8 @@ import java.util.Calendar;
  */
 public class Util {
 
-    public static String FILE_PATH =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"temp.png";
+    public static String FILE_PATH =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/temp.png";
+    public static String IMAGE_PATH =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/challengeImage.png";
     public static String FILE_SEPERATOR =  "|";
     public static void showTimePicker(Context context, final TextView time) {
         Calendar mcurrentTime = Calendar.getInstance();
@@ -263,5 +265,44 @@ public class Util {
         metaRetriever.release();
 
         return out;
+    }
+
+    public static long getSongDurationInMillis(String path){
+        MediaMetadataRetriever metaRetriever = new MediaMetadataRetriever();
+        metaRetriever.setDataSource(path);
+
+        String out = "";
+        // get mp3 info
+
+        // convert duration to minute:seconds
+        String duration =
+                metaRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+        Log.v("time", duration);
+        long dur = Long.parseLong(duration);
+
+        return dur;
+    }
+
+    public static void convertToPng(View view) {
+        Bitmap bitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        FileOutputStream out = null;
+        try {
+            out = new FileOutputStream(IMAGE_PATH);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, out); // bmp is your Bitmap instance
+            // PNG is a lossless format, the compression factor (100) is ignored
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (out != null) {
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

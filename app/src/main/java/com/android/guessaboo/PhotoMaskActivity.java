@@ -23,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -30,10 +31,13 @@ import java.io.File;
 public class PhotoMaskActivity extends BaseActivity implements View.OnClickListener,View.OnTouchListener, View.OnDragListener {
 
     private LinearLayout mWorkSpace;
+    private TextView mDesc;
     private ImageView mImg;
     protected final static int MASK_CODE = 14;
     protected final static int STICKER_CODE = 15;
     protected final static int TEXT_CODE = 16;
+    protected final static int MUSIC_CODE = 17;
+    private String MUSIC_FILE_PATH;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,9 +48,12 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         int deviceHeight = displayMetrics.heightPixels;
 
         mWorkSpace = (LinearLayout) findViewById(R.id.workspace);
+        mDesc = (TextView) findViewById(R.id.desc);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mWorkSpace.getLayoutParams();
         params.height = (int) (deviceHeight * .40f);
         mWorkSpace.setLayoutParams(params);
+
+        mDesc.setText(getDescText());
 
         findViewById(R.id.musicBtn).setOnClickListener(this);
         findViewById(R.id.maskBtn).setOnClickListener(this);
@@ -102,7 +109,7 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
                 showPicker();
                 break;
             case R.id.musicBtn:
-                startActivity(new Intent(this, SongsActivity.class));
+                startActivityForResult(new Intent(this, SongsActivity.class), MUSIC_CODE, null);
                 break;
             default:
                 break;
@@ -124,14 +131,20 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
             if(data != null){
                 int id = data.getIntExtra("image",0);
                 addImageToWorkspace(id);
+                mDesc.setVisibility(View.GONE);
             }
         }else if(requestCode == STICKER_CODE){
             if(data != null){
                 int id = data.getIntExtra("image",0);
                 addImageToWorkspace(id);
+                mDesc.setVisibility(View.GONE);
             }
         }else if(requestCode == TEXT_CODE){
             addImageFromFileToWorkspace();
+        }else if(requestCode == MUSIC_CODE){
+            if(data != null){
+                MUSIC_FILE_PATH = data.getStringExtra("music");
+            }
         }
     }
 
@@ -213,7 +226,10 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-                startActivity(new Intent(PhotoMaskActivity.this, InvitationActivity.class));
+                Util.convertToPng(mWorkSpace);
+                Intent intent = new Intent(PhotoMaskActivity.this, InvitationActivity.class);
+                intent.putExtra("music", MUSIC_FILE_PATH);
+                startActivity(intent);
             }
         });
 
@@ -225,5 +241,16 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         });
         // Showing Alert Message
         alertDialog.show();
+    }
+
+    private String getDescText(){
+
+        String text = "1. Tap upload button to upload an image."+"\n"
+                +"2. Select a mask to mask the subject or object."+"\n"
+                +"3. Enter subject or object name behind the mask."+"\n"
+                +"4. Add sticker, text and music as desire and click done.";
+
+        return text;
+
     }
 }

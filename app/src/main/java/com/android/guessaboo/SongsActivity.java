@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.accessibility.AccessibilityManager;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.guessaboo.adapter.MusicAdapter;
 import com.android.guessaboo.adapter.MusicItem;
@@ -17,12 +21,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SongsActivity extends BaseActivity implements View.OnClickListener {
+public class SongsActivity extends BaseActivity implements View.OnClickListener,AdapterView.OnItemClickListener {
 
     private final int MUSIC_REQ_CODE = 101;
     private ListView mSongsList;
     private MusicAdapter mAdapter;
     private List<MusicItem> data = new ArrayList<>();
+    private String FILE_PATH;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +36,8 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
         findViewById(R.id.uploadMusic).setOnClickListener(this);
         mSongsList = (ListView) findViewById(R.id.songsList);
         mSongsList.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
+        mSongsList.setOnItemClickListener(this);
         getData();
-
     }
 
     private void getData(){
@@ -43,7 +47,7 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
 
                 MusicItem item = new MusicItem();
                 item.setFilePath(str[i]);
-                item.setDuration(getDuration(str[i]));
+                item.setDuration(str[i]);
                 data.add(item);
             }
         } catch (IOException e) {
@@ -57,16 +61,6 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
         mSongsList.setAdapter(mAdapter);
     }
 
-    private String getDuration(String source) throws IOException {
-        MediaPlayer mp = new MediaPlayer();
-        mp.setDataSource(source);
-        int duration = mp.getDuration();
-
-        int seconds = (int) (duration / 1000) % 60 ;
-        int minutes = (int) ((duration / (1000*60)) % 60);
-
-        return minutes+" : "+seconds;
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -85,8 +79,16 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_done) {
+            if(!TextUtils.isEmpty(FILE_PATH)) {
+                Intent intent = new Intent();
+                intent.putExtra("music", FILE_PATH);
+                setResult(PhotoMaskActivity.MUSIC_CODE, intent);
+                finish();
+            }else
+                Toast.makeText(this, "Please song first", Toast.LENGTH_LONG).show();
             return true;
         }
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -111,9 +113,15 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener 
                 path = path + Util.FILE_SEPERATOR;
                 System.out.println(path);
                 Util.saveData(this, path);
+                mAdapter.clearData();
                 getData();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        FILE_PATH = ((MusicItem)adapterView.getItemAtPosition(i)).getFilePath();
     }
 }

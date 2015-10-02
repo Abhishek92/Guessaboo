@@ -69,7 +69,8 @@ public class BaseActivity extends AppCompatActivity {
         mContainer = (RelativeLayout) findViewById(R.id.container);
         mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        //mAdView.loadAd(adRequest);
+        mAdView.setVisibility(View.GONE);
 
 
        // setDoneBar(false);
