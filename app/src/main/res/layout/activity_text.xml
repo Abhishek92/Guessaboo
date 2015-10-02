@@ -92,7 +92,8 @@
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Academy"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="23sp" />
 
             <RadioButton
                 android:id="@+id/agency"
@@ -100,7 +101,8 @@
                 android:layout_height="wrap_content"
                 android:text="Agency FB"
                 android:drawablePadding="80dp"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:textSize="23sp" />
 
             <RadioButton
                 android:id="@+id/alab"
@@ -108,7 +110,9 @@
                 android:layout_height="wrap_content"
                 android:text="Alba"
                 android:drawablePadding="80dp"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:checked="false"
+                android:textSize="23sp" />
 
             <RadioButton
                 android:id="@+id/arial"
@@ -116,7 +120,9 @@
                 android:layout_height="wrap_content"
                 android:drawablePadding="80dp"
                 android:text="Arial"
-                android:textColor="#000000" />
+                android:textColor="#000000"
+                android:checked="false"
+                android:textSize="23sp" />
 
 
         </RadioGroup>

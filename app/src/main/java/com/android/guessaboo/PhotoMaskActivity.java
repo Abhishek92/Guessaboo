@@ -120,8 +120,10 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
     protected void onImageSet() {
         super.onImageSet();
         Drawable drawable = getBitmapDrawable(mWorkSpace);
-        if(drawable != null)
+        if(drawable != null) {
             mWorkSpace.setBackground(drawable);
+            mDesc.setVisibility(View.GONE);
+        }
     }
 
     @Override

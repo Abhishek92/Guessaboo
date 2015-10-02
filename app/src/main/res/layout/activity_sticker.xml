@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:text="Sticker must be 600*600 px- png format"/>
+        android:text="Sticker must be 600*600 px- png format"
+        android:textStyle="bold" />
 
     <GridView android:id="@+id/stickerView"
         android:layout_width="match_parent"

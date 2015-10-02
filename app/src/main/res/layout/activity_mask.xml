@@ -21,7 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:text="Mask must be 600*600 px- png format"/>
+        android:text="Mask must be 600*600 px- png format"
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/maskName"
@@ -41,7 +42,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:text="Select a mask, enter mask name, then tab save"/>
+        android:text="Select a mask, enter mask name, then tab save"
+        android:textStyle="bold" />
 
 
     <GridView android:id="@+id/maskView"
