@@ -38,6 +38,7 @@ public class Util {
     public static String FILE_PATH =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/temp.png";
     public static String IMAGE_PATH =  Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM)+"/challengeImage.png";
     public static String FILE_SEPERATOR =  "|";
+    public static String SONG_PATH;
     public static void showTimePicker(Context context, final TextView time) {
         Calendar mcurrentTime = Calendar.getInstance();
         int hour = 0;

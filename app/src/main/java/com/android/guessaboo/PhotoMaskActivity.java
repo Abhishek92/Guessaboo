@@ -153,6 +153,7 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
     @Override
     public boolean onDrag(View view, DragEvent event) {
         int action = event.getAction();
+        View myView;
         switch (event.getAction()) {
             case DragEvent.ACTION_DRAG_STARTED:
                 // do nothing
@@ -167,10 +168,12 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
                 float Y = event.getY();
 
                 Log.d("Log", "X " + (int) X + "Y " + (int) Y);
-                View myView = (View) event.getLocalState();
-                myView.setX(X - (myView.getWidth() / 2));
-                myView.setY(Y - (myView.getHeight() / 2));
-                myView.setVisibility(View.VISIBLE);
+                myView = (View) event.getLocalState();
+                if(myView != null) {
+                    myView.setX(X - (myView.getWidth() / 2));
+                    myView.setY(Y - (myView.getHeight() / 2));
+                    myView.setVisibility(View.VISIBLE);
+                }
 
                 break;
             case DragEvent.ACTION_DRAG_ENDED:
@@ -182,7 +185,7 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
 
     private void addImageToWorkspace(int id){
         ImageView iv = new ImageView(this);
-        iv.setLayoutParams(new ViewGroup.LayoutParams(90,90));
+        iv.setLayoutParams(new ViewGroup.LayoutParams(convertDpToPx(90), convertDpToPx(90)));
         iv.setImageResource(id);
         iv.setOnTouchListener(this);
         mWorkSpace.addView(iv);
@@ -195,7 +198,7 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
 
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             ImageView iv = new ImageView(this);
-            iv.setLayoutParams(new ViewGroup.LayoutParams(mWorkSpace.getWidth() - 90, mWorkSpace.getHeight() - 90));
+            iv.setLayoutParams(new ViewGroup.LayoutParams(convertDpToPx(90), convertDpToPx(90)));
             iv.setImageBitmap(myBitmap);
             iv.setOnTouchListener(this);
             mWorkSpace.addView(iv);
@@ -254,5 +257,11 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
 
         return text;
 
+    }
+
+    private int convertDpToPx(int size){
+        final float scale = getResources().getDisplayMetrics().density;
+        int pixels = (int) (size * scale + 0.5f);
+        return pixels;
     }
 }

@@ -123,5 +123,9 @@ public class SongsActivity extends BaseActivity implements View.OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         FILE_PATH = ((MusicItem)adapterView.getItemAtPosition(i)).getFilePath();
+        Util.SONG_PATH = FILE_PATH;
+        Intent intent = new Intent(this, MusicService.class);
+        stopService(intent);
+        startService(intent);
     }
 }

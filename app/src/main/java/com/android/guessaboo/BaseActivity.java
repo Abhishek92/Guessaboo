@@ -218,7 +218,7 @@ public class BaseActivity extends AppCompatActivity {
         if(!TextUtils.isEmpty(IMAGE_PATH)){
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
             Bitmap bitmap = BitmapFactory.decodeFile(IMAGE_PATH,bmOptions);
-            bitmap = Bitmap.createScaledBitmap(bitmap,parent.getWidth(),parent.getHeight(),true);
+            //bitmap = Bitmap.createScaledBitmap(bitmap,parent.getWidth(),parent.getHeight(),true);
             return new BitmapDrawable(getResources(), bitmap);
         }else
             return null;
