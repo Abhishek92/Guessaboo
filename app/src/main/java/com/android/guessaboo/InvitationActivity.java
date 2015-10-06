@@ -33,7 +33,9 @@ public class InvitationActivity extends BaseActivity implements View.OnClickList
         findViewById(R.id.setTimer).setOnClickListener(this);
 
         mMusicPath = getIntent().getStringExtra("music");
-        timerView.setText(Util.getSongDuration(mMusicPath));
+
+        if(!TextUtils.isEmpty(mMusicPath))
+            timerView.setText(Util.getSongDuration(mMusicPath));
     }
 
     @Override

@@ -12,4 +12,5 @@
     <string name="title_activity_text">Text</string>
     <string name="title_activity_photo_share">Photo Share</string>
     <string name="title_activity_songs">Music</string>
+    <string name="title_activity_login">Login</string>
 </resources>
