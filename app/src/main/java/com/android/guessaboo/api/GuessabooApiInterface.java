@@ -1,5 +1,6 @@
 package com.android.guessaboo.api;
 
+import com.android.guessaboo.model.CommonResponse;
 import com.android.guessaboo.model.LoginModel;
 import com.squareup.okhttp.Call;
 
@@ -21,4 +22,8 @@ public interface GuessabooApiInterface {
     @FormUrlEncoded
     @POST("/api.php")
     void doLogin(@Query("rquest") String rquest , @FieldMap Map<String, String> request,Callback<LoginModel> loginModelCallback);
+
+    @FormUrlEncoded
+    @POST("/api.php")
+    void doShareImage(@Query("rquest") String rquest , @FieldMap Map<String, Object> request,Callback<CommonResponse> commonResponseCallback);
 }

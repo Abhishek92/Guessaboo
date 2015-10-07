@@ -15,6 +15,7 @@ public class GuessabooRestClient {
         restAdapter = new RestAdapter.Builder()
                 .setEndpoint(API_URL)
                 .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setErrorHandler(new GuessabooApiErrorHandler())
                 .build();
     }
 
