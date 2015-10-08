@@ -61,10 +61,7 @@ public class ChallengeActivity extends BaseActivity {
         // Setting Positive "Yes" Button
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog,int which) {
-                /*Util.convertToPng(mWorkSpace);
-                Intent intent = new Intent(PhotoMaskActivity.this, InvitationActivity.class);
-                intent.putExtra("music", MUSIC_FILE_PATH);
-                startActivity(intent);*/
+
             }
         });
 
@@ -75,6 +72,9 @@ public class ChallengeActivity extends BaseActivity {
             }
         });
         // Showing Alert Message
+        alertDialog.setCancelable(false);
         alertDialog.show();
     }
+
+
 }
