@@ -1,9 +1,11 @@
 package com.android.guessaboo.api;
 
+import com.android.guessaboo.model.ChallengeModel;
 import com.android.guessaboo.model.CommonResponse;
 import com.android.guessaboo.model.LoginModel;
 import com.squareup.okhttp.Call;
 
+import java.util.List;
 import java.util.Map;
 
 import retrofit.Callback;
@@ -26,4 +28,7 @@ public interface GuessabooApiInterface {
     @FormUrlEncoded
     @POST("/api.php")
     void doShareImage(@Query("rquest") String rquest , @FieldMap Map<String, Object> request,Callback<CommonResponse> commonResponseCallback);
+
+    @GET("/api.php")
+    void getChallenges(@Query("rquest") String rquest , @Query("touser") String email, Callback<List<ChallengeModel>> data);
 }

@@ -9,6 +9,16 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.guessaboo.api.GuessabooRestClient;
+import com.android.guessaboo.model.ChallengeModel;
+
+import java.util.List;
+
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 
 public class MainActivity extends BaseActivity {
@@ -30,10 +40,39 @@ public class MainActivity extends BaseActivity {
             }
         });
 
+
+
         SavePreferences prefs = new SavePreferences(this);
+        if(prefs.isLoggedIn())
+            getChallenge();
         if(!prefs.isLoggedIn()) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
+    }
+
+    private void getChallenge(){
+        String email = "sjain@componence.in";/*new SavePreferences(this).getEmail();*/
+        GuessabooRestClient.getGuessabooApi().getChallenges("challengesByUser", email, new Callback<List<ChallengeModel>>() {
+            @Override
+            public void success(List<ChallengeModel> challengeModels, Response response) {
+                if(challengeModels != null && challengeModels.size() != 0) {
+                    ChallengeModel model = challengeModels.get(0);
+                    openChallenge(model);
+                    Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void openChallenge(ChallengeModel data){
+        Intent intent = new Intent(this, ChallengeActivity.class);
+        intent.putExtra("challengeData", data);
+        startActivity(intent);
     }
 }

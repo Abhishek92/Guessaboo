@@ -216,7 +216,17 @@ public class BaseActivity extends AppCompatActivity {
     protected Drawable getBitmapDrawable(ViewGroup parent){
         if(!TextUtils.isEmpty(IMAGE_PATH)){
             BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-            Bitmap bitmap = BitmapFactory.decodeFile(IMAGE_PATH,bmOptions);
+            Bitmap bitmap = BitmapFactory.decodeFile(IMAGE_PATH, bmOptions);
+            //bitmap = Bitmap.createScaledBitmap(bitmap,parent.getWidth(),parent.getHeight(),true);
+            return new BitmapDrawable(getResources(), bitmap);
+        }else
+            return null;
+    }
+
+    protected Drawable getBitmapDrawable(String path){
+        if(!TextUtils.isEmpty(path)){
+            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+            Bitmap bitmap = BitmapFactory.decodeFile(path, bmOptions);
             //bitmap = Bitmap.createScaledBitmap(bitmap,parent.getWidth(),parent.getHeight(),true);
             return new BitmapDrawable(getResources(), bitmap);
         }else

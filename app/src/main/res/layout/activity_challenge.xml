@@ -41,7 +41,7 @@
             android:textStyle="bold"
             android:textColor="@android:color/black"
             android:layout_marginTop="8dp"
-            android:text="mary, adas, adadsad,d adasdas,dasdasda,,asdasdasdsad,,asdasdasds,sad,asd"/>
+            android:text="mary, john, mark, blaze, steve,damien, mike, brand,cooper"/>
 
 
     </LinearLayout>
