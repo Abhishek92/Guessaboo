@@ -20,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,7 +31,7 @@ import java.io.File;
 
 public class PhotoMaskActivity extends BaseActivity implements View.OnClickListener,View.OnTouchListener, View.OnDragListener {
 
-    private LinearLayout mWorkSpace;
+    private FrameLayout mWorkSpace;
     private TextView mDesc;
     private ImageView mImg;
     protected final static int MASK_CODE = 14;
@@ -47,7 +48,8 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         int deviceHeight = displayMetrics.heightPixels;
 
-        mWorkSpace = (LinearLayout) findViewById(R.id.workspace);
+        mWorkSpace = (FrameLayout) findViewById(R.id.workspace);
+        mImg = (ImageView) findViewById(R.id.bgImage);
         mDesc = (TextView) findViewById(R.id.desc);
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) mWorkSpace.getLayoutParams();
         params.height = (int) (deviceHeight * .40f);
@@ -121,7 +123,8 @@ public class PhotoMaskActivity extends BaseActivity implements View.OnClickListe
         super.onImageSet();
         Drawable drawable = getBitmapDrawable(mWorkSpace);
         if(drawable != null) {
-            mWorkSpace.setBackground(drawable);
+            mImg.setImageDrawable(drawable);
+            //mWorkSpace.setBackground(drawable);
             mDesc.setVisibility(View.GONE);
         }
     }

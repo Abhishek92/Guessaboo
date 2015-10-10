@@ -28,6 +28,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     private EditText mUsername;
     private EditText mPassword;
+    private EditText mCPassword;
     private ProgressDialog dialog;
 
     @Override
@@ -38,6 +39,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
         mUsername = (EditText) findViewById(R.id.username);
         mPassword = (EditText) findViewById(R.id.password);
+        mCPassword = (EditText) findViewById(R.id.confirmPassword);
 
         findViewById(R.id.submit).setOnClickListener(this);
 
@@ -100,6 +102,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             flag = false;
         } else if(mPassword.getText().toString().length() < 5){
             mPassword.setError("Password length must be greater than 5 digit");
+            flag = false;
+        }else if(TextUtils.isEmpty(mCPassword.getText().toString())){
+            mCPassword.setError("Incorrect password");
+            flag = false;
+        }else if(!mCPassword.getText().toString().equals(mPassword.getText().toString())){
+            mCPassword.setError("Incorrect password");
             flag = false;
         }
 
